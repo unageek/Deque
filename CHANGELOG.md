@@ -2,6 +2,6 @@
 
 Items marked with ⚠️ are breaking changes.
 
-## v1.0.0 - 2022-08-04
+## Unreleased
 
 The initial release! 🎉
