@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Unageek.Collections.Deque</AssemblyName>
     <Title>Deque</Title>
-    <Version>1.0.0-rc.1</Version>
+    <Version>1.0.0</Version>
     <Description>Double-ended queue for .NET</Description>
     <Copyright>Copyright (c) 2022 Masashi Mizuno</Copyright>
     <Authors>Masashi Mizuno</Authors>
