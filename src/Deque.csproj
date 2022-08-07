@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Unageek.Collections.Deque</AssemblyName>
     <Title>Deque</Title>
-    <Version>1.0.0-rc.0</Version>
+    <Version>1.0.0-rc.1</Version>
     <Description>Double-ended queue for .NET</Description>
     <Copyright>Copyright (c) 2022 Masashi Mizuno</Copyright>
     <Authors>Masashi Mizuno</Authors>
@@ -14,6 +14,7 @@
     <PackageTags>circular-buffer circular-queue deque double-ended-queue ring-buffer</PackageTags>
     <RepositoryUrl>https://github.com/unageek/Deque</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
@@ -27,6 +28,10 @@
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.42.0.51121" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
