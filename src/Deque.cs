@@ -1055,7 +1055,7 @@ public sealed class Deque<T> : IList<T>, IReadOnlyList<T>, IList
 
     private void WrapCopy(int srcIndex, int dstIndex, int count)
     {
-        Debug.Assert(count <= Capacity / 2);
+        Debug.Assert(count <= Capacity / 2); // (*)
 
         srcIndex = WrapIndex(srcIndex);
         dstIndex = WrapIndex(dstIndex);
@@ -1073,7 +1073,7 @@ public sealed class Deque<T> : IList<T>, IReadOnlyList<T>, IList
                 //  |       A       |                       |
                 //  +---------------+                       |
                 //                      +---------------+   |
-                //                      |       A       |   |
+                //                      |       A'      |   |
                 //                      +---------------+   |
                 //                      d                   |
 
@@ -1082,22 +1082,25 @@ public sealed class Deque<T> : IList<T>, IReadOnlyList<T>, IList
                 //            |    A    |  B  |             |
                 //            +---------+-----+             |
                 //                                +---------+-----+
-                //                                |    A    |  B  |
+                //                                |    A'   |  B' |
                 //                                +---------+-----+
                 //                                d         |
 
+                // In this case, A' ∩ B = ∅ holds.
                 Array.Copy(_buf, srcIndex, _buf, dstIndex, a);
                 if (b > 0)
                     Array.Copy(_buf, srcIndex + a, _buf, 0, b);
             }
             else
             {
+                // By (*), d + count ≤ s + Capacity.
+
                 //  s                           |
                 //  +---------------+           |
                 //  |       A       |           |
                 //  +---------------+           |
                 //          +---------------+   |
-                //          |       A       |   |
+                //          |       A'      |   |
                 //          +---------------+   |
                 //          d                   |
 
@@ -1106,7 +1109,7 @@ public sealed class Deque<T> : IList<T>, IReadOnlyList<T>, IList
                 //          |     A     | B |   |
                 //          +-----------+---+   |
                 //                  +-----------+---+
-                //                  |     A     | B |
+                //                  |     A'    | B'|
                 //                  +-----------+---+
                 //                  d           |
 
@@ -1115,10 +1118,11 @@ public sealed class Deque<T> : IList<T>, IReadOnlyList<T>, IList
                 //                  | A |   B   | C |
                 //                  +---+-------+---+
                 //                          +---+-------+---+
-                //                          | A |   B   | C |
+                //                          | A'|   B'  | C'|
                 //                          +---+-------+---+
                 //                          d   |
 
+                // In this case, C' ∩ (A ∪ B) = ∅ and B' ∩ A = ∅ hold.
                 if (c > 0)
                     Array.Copy(_buf, 0, _buf, b, c);
                 if (b > 0)
@@ -1139,7 +1143,7 @@ public sealed class Deque<T> : IList<T>, IReadOnlyList<T>, IList
                 //                      |       A       |   |
                 //                      +---------------+   |
                 //  +---------------+                       |
-                //  |       A       |                       |
+                //  |       A'      |                       |
                 //  +---------------+                       |
                 //  d                                       |
 
@@ -1148,22 +1152,25 @@ public sealed class Deque<T> : IList<T>, IReadOnlyList<T>, IList
                 //                                |    A    |  B  |
                 //                                +---------+-----+
                 //            +---------+-----+             |
-                //            |    A    |  B  |             |
+                //            |    A'   |  B' |             |
                 //            +---------+-----+             |
                 //            d                             |
 
+                // In this case, B' ∩ A = ∅ holds.
                 if (b > 0)
                     Array.Copy(_buf, 0, _buf, dstIndex + a, b);
                 Array.Copy(_buf, srcIndex, _buf, dstIndex, a);
             }
             else
             {
+                // By (*), s + count ≤ d + Capacity.
+
                 //          s                   |
                 //          +---------------+   |
                 //          |       A       |   |
                 //          +---------------+   |
                 //  +---------------+           |
-                //  |       A       |           |
+                //  |       A'      |           |
                 //  +---------------+           |
                 //  s                           |
 
@@ -1172,7 +1179,7 @@ public sealed class Deque<T> : IList<T>, IReadOnlyList<T>, IList
                 //                  |     A     | B |
                 //                  +-----------+---+
                 //          +-----------+---+   |
-                //          |     A     | B |   |
+                //          |     A'    | B'|   |
                 //          +-----------+---+   |
                 //          d                   |
 
@@ -1181,10 +1188,11 @@ public sealed class Deque<T> : IList<T>, IReadOnlyList<T>, IList
                 //                          | A |   B   | C |
                 //                          +---+-------+---+
                 //                  +---+-------+---+
-                //                  | A |   B   | C |
+                //                  | A'|   B'  | C'|
                 //                  +---+-------+---+
                 //                  d           |
 
+                // In this case, A' ∩ (B ∪ C) = ∅ and B' ∩ C = ∅ hold.
                 Array.Copy(_buf, srcIndex, _buf, dstIndex, a);
                 if (b > 0)
                     Array.Copy(_buf, 0, _buf, dstIndex + a, b);
