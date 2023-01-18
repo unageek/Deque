@@ -1,5 +1,5 @@
 [![nuget](https://img.shields.io/nuget/v/Unageek.Collections.Deque)](https://www.nuget.org/packages/Unageek.Collections.Deque)
-[![build](https://img.shields.io/github/workflow/status/unageek/Deque/build/main)](https://github.com/unageek/Deque/actions?query=branch%3Amain+workflow%3Abuild)
+[![build](https://img.shields.io/github/actions/workflow/status/unageek/Deque/build.yml?branch=main)](https://github.com/unageek/Deque/actions?query=branch%3Amain+workflow%3Abuild)
 
 # Deque&lt;T&gt;
 
