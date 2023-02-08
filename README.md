@@ -35,8 +35,8 @@ Console.WriteLine(queue.SequenceEqual(stack)); // True
 
   `Deque<T>` also provides the following methods:
 
-  - `void AddFirst(T item)` (equivalent to `Add`)
-  - `void AddLast(T item)`
+  - `void AddFirst(T item)`
+  - `void AddLast(T item)` (equivalent to `Add`)
   - `void RemoveFirst()`
   - `void RemoveLast()`
   - `T PeekFirst()`
